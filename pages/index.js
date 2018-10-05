@@ -9,6 +9,7 @@
 */
 
 import Link from "next/link";
+import Header from '../components/Header'
 
 /*
     Some notes:
@@ -16,11 +17,15 @@ import Link from "next/link";
         1.  You can change `<a>` to `<button>` (ala it supports `onClick`)
 */
 
+/*
+    <Link href="/about"> 
+        <button style={{ fontSize: 20}}>About page</button>
+    </Link>
+*/
+
 const Index = () => (
     <div>
-        <Link href="/about"> 
-            <button style={{ fontSize: 20}}>About page</button>
-        </Link>
+        <Header />
         <p>Hello <em>Next.js</em></p>
     </div>
 )
