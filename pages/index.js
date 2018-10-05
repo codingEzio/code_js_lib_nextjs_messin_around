@@ -10,58 +10,49 @@
 
 import Link from "next/link";
 import Layout from '../components/MyLayout'
-import fetch from "isomorphic-unfetch";
 
-/*
-    Some notes:
-        0.  The 'style' won't work on the outer `Link` (analogy!)
-        1.  You can change `<a>` to `<button>` (ala it supports `onClick`)
-*/
+function getPosts() {
+    return [
+        { id: "greeting",     title: "Hello Next.js" },
+        { id: "praise-yo",    title: "It's awesome!" },
+        { id: "praise-again", title: "And .. It's easy!" },
+    ]
+}
 
-/*
-    <Link href="/about"> 
-        <button style={{ fontSize: 20}}>About page</button>
-    </Link>
-*/
-
-/*
-    Here are mostly code, except the `show`.
-
-    Fetch data 
-        JSON file 
-            `show` as key 
-                "show":{"id":1369, ... }
-*/
-
-const Index = (props) => (
+export default () => (
     <Layout>
-        <h1>Marvel's TV Shows</h1>
+        <h1>My Blog</h1>
         <ul>
-            {props.shows.map(({ show }) => (
-                <li key={show.id}>
-                    <Link as={`/p/${show.id}`} href={`/post?id=${show.id}`}>
-                        <a>{show.name}</a>
+            {getPosts().map((post) => (
+                <li key={post.id}>
+                    <Link as={`/p/${post.id}`} href={`/post/?title=${post.title}`}>
+                        <a>{post.title}</a>
                     </Link>
                 </li>
             ))}
         </ul>
+        <style jsx>{`
+            h1, a {
+                font-family: "Consolas";
+            }
+
+            ul {
+                padding: 5;
+            }
+
+            li {
+                list-style: none;
+                margin: 5px 0;
+            }
+
+            a {
+                text-decoration: none;;
+                color: #952323;
+            }
+
+            a:hover {
+                opacity: 0.6;
+            }
+        `}</style>
     </Layout>
 )
-
-/*
-    This (request) was done by the "server".
-        The msg will be displayed at the (npm) terminal.
-*/
-
-Index.getInitialProps = async function () {
-    const res = await fetch('https://api.tvmaze.com/search/shows?q=Marvels')
-    const data = await res.json()
-
-    console.log(`Show data fetched. Count: ${data.length}`)
-
-    return {
-        shows: data 
-    }
-}
-
-export default Index
