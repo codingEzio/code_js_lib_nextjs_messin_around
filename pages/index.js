@@ -24,6 +24,15 @@ import fetch from "isomorphic-unfetch";
     </Link>
 */
 
+/*
+    Here are mostly code, except the `show`.
+
+    Fetch data 
+        JSON file 
+            `show` as key 
+                "show":{"id":1369, ... }
+*/
+
 const Index = (props) => (
     <Layout>
         <h1>Marvel's TV Shows</h1>
@@ -38,6 +47,11 @@ const Index = (props) => (
         </ul>
     </Layout>
 )
+
+/*
+    This (request) was done by the "server".
+        The msg will be displayed at the (npm) terminal.
+*/
 
 Index.getInitialProps = async function () {
     const res = await fetch('https://api.tvmaze.com/search/shows?q=Marvels')
