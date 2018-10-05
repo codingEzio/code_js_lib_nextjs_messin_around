@@ -23,10 +23,21 @@ import Layout from '../components/MyLayout'
     </Link>
 */
 
-const Index = () => (
-    <Layout>
-        <p>Hello <em>Next.js</em></p>
-    </Layout>
+const PostLink = (props) => (
+    <li>
+        <Link href={`/post?title=${props.title}`}>
+            <a>{props.title}</a>
+        </Link>
+    </li>
 )
 
-export default Index
+export default () => (
+    <Layout>
+        <h1>My Blog</h1>
+        <ul>
+            <PostLink title="Hello Next.js" />
+            <PostLink title="It's awesome!" />
+            <PostLink title="And .. It's easy!" />
+        </ul>
+    </Layout>
+)
