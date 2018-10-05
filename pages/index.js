@@ -19,39 +19,53 @@ function getPosts() {
     ]
 }
 
-export default () => (
-    <Layout>
-        <h1>My Blog</h1>
-        <ul>
-            {getPosts().map((post) => (
-                <li key={post.id}>
-                    <Link as={`/p/${post.id}`} href={`/post/?title=${post.title}`}>
-                        <a>{post.title}</a>
-                    </Link>
-                </li>
-            ))}
-        </ul>
+/*
+    The CSS in React do have scope!
+    
+    You need to add the style to each function 
+        (well, just for better understanding)
+        (it SHOULD be called as `component`, XD)
+*/
+
+const PostLink = ({ post }) => (
+    <li>
+        <Link as={`/p/${post.id}`} href={`/post/?title=${post.title}`}> 
+            <a>{post.title}</a>
+        </Link>
         <style jsx>{`
-            h1, a {
-                font-family: "Consolas";
-            }
-
-            ul {
-                padding: 5;
-            }
-
             li {
                 list-style: none;
                 margin: 5px 0;
             }
 
             a {
+                font-family: "Comic Sans MS";
                 text-decoration: none;;
-                color: #952323;
+                color: pink;
             }
 
             a:hover {
                 opacity: 0.6;
+            }
+        `}</style>
+    </li>
+)
+
+export default () => (
+    <Layout>
+        <h1>My Blog</h1>
+        <ul>
+            {getPosts().map((post) => (
+                <PostLink key={post.id} post={post} />
+            ))}
+        </ul>
+        <style jsx>{`
+            h1 {
+                font-family: "Century";
+            }
+
+            ul {
+                padding: 5;
             }
         `}</style>
     </Layout>
