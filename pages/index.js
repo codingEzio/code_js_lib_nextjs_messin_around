@@ -9,7 +9,7 @@
 */
 
 import Link from "next/link";
-import Header from '../components/Header'
+import Layout from '../components/MyLayout'
 
 /*
     Some notes:
@@ -24,10 +24,9 @@ import Header from '../components/Header'
 */
 
 const Index = () => (
-    <div>
-        <Header />
+    <Layout>
         <p>Hello <em>Next.js</em></p>
-    </div>
+    </Layout>
 )
 
 export default Index
